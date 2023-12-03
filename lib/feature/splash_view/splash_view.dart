@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:third_project/view/auth_view/auth_view.dart';
+import 'package:regester/feature/login/login_page.dart';
 
 import '../widget/image_app.dart';
 
@@ -34,7 +34,7 @@ class _SplashViewState extends State<SplashView> {
   void navigateHome() {
     Future.delayed(
       const Duration(seconds: 1),
-          () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const AuthView(),)),
+          () => Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Login(),)),
     );
   }
 }

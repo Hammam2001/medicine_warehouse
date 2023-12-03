@@ -16,10 +16,10 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orangeAccent,
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text(
           'Pharmacy',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color: Colors.white),
         ),
       ),
       body: Center(
@@ -60,7 +60,7 @@ class Login extends StatelessWidget {
                   height: 40,
                   child: MaterialButton(
                     onPressed: () {},
-                    color: Colors.orangeAccent,
+                    color: Theme.of(context).primaryColor,
                     child: const Text(
                       'LOGIN',
                       style: TextStyle(fontSize: 17, color: Colors.white),
@@ -83,10 +83,10 @@ class Login extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
                         },
-                        child: const Text(
+                        child:  Text(
                           'Register',
                           style: TextStyle(
-                              fontSize: 18, color: Colors.orangeAccent),
+                              fontSize: 18, color: Theme.of(context).primaryColor,),
                         ))
                   ],
                 )

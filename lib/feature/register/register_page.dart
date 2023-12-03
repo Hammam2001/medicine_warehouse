@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/global/app_text-form_filed.dart';
+import '../home_view/home_view.dart';
 
 
 class Register extends StatelessWidget {
@@ -16,8 +17,8 @@ class Register extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register',),
-        backgroundColor: Colors.orangeAccent,
+        title: const Text('Register',style: TextStyle(color:Colors.white),),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -85,8 +86,10 @@ class Register extends StatelessWidget {
                 width: double.infinity,
                 height: 40,
                 child: MaterialButton(
-                  onPressed: () {},
-                  color: Colors.orangeAccent,
+                  onPressed: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => HomeView()) );
+                  },
+                  color: Theme.of(context).primaryColor,
                   child: const Text(
                     'Register',
                     style: TextStyle(fontSize: 17, color: Colors.white),

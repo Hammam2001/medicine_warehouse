@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:third_project/view/first_screen/widget/first_app_bar.dart';
+import 'package:regester/feature/first_screen/widget/first_app_bar.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
@@ -66,7 +66,7 @@ class _FirstScreenState extends State<FirstScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Image.asset("assets/heartt.png",width: 110,),
+                                Image.asset("assets/image/hart.jpg",width: 110,),
                                 Text(
                                   "Heart Medicine",
                                   overflow: TextOverflow.ellipsis,

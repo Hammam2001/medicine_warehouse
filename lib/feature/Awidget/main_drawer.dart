@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:third_project/view/auth_view/auth_view.dart';
+import 'package:regester/feature/login/login_page.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class _MainDrawerState extends State<MainDrawer> {
             ),
             InkWell(
               onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const AuthView(),)) ;
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Login(),)) ;
               },
               child: Row(
                 children: const [

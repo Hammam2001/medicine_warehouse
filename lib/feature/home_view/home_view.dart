@@ -1,8 +1,9 @@
 import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
-import 'package:third_project/view/Awidget/main_drawer.dart';
-import 'package:third_project/view/first_screen/First_Screen.dart';
+
+import '../Awidget/main_drawer.dart';
+import '../first_screen/First_Screen.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
