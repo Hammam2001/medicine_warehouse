@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../search_delegate/search_delegate.dart';
+
 class FirstAppBar extends StatelessWidget {
   const FirstAppBar({Key? key}) : super(key: key);
 
@@ -21,27 +23,11 @@ class FirstAppBar extends StatelessWidget {
                   color: Colors.white,
                   size: 28,
                 )),
-            // Column(
-            //   crossAxisAlignment: CrossAxisAlignment.start,
-            //   children: const [
-            //     Text(
-            //       "Get Your Medicine",
-            //       style: TextStyle(
-            //           color: Colors.white,
-            //           fontSize: 22,
-            //           fontWeight: FontWeight.bold),
-            //     ),
-            //     Text(
-            //       "All that you need",
-            //       style: TextStyle(
-            //         color: Colors.white70,
-            //         fontSize: 16,
-            //       ),
-            //     ),
-            //   ],
-            // ),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showSearch(
+                      context: context, delegate: MySearchDelegate());
+                },
                 icon: const Icon(
                   Icons.search,
                   color: Colors.white,

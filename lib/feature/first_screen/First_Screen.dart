@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:regester/feature/Medicine_View/medicine_view.dart';
+import 'package:regester/feature/first_screen/widget/cat_widget.dart';
 import 'package:regester/feature/first_screen/widget/first_app_bar.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -55,31 +57,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         itemCount: 20,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              border: Border.all(
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                            padding: const EdgeInsets.all(8),
-                            margin: const EdgeInsets.all(5),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Image.asset("assets/image/hart.jpg",width: 110,),
-                                Text(
-                                  "Heart Medicine",
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          return const CatWidget();
                         },
                       ),
                     ),

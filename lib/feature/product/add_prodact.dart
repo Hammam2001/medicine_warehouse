@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:regester/feature/product/product.dart';
+import 'package:regester/feature/login/login_page.dart';
 class Model{
   final String name;
    final Image  image;
@@ -27,6 +27,6 @@ Widget item(context) => Row(
   children: [
     Image.asset('assets/image/phone.jpeg',fit: BoxFit.fill,width: 200,),
     SizedBox(width: 20,),
-    TextButton( onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>Product())); }, child: Text('Iphone 12')),
+    TextButton( onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>Login())); }, child: Text('Iphone 12')),
   ],
 );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:regester/feature/home_view/home_view.dart';
 import '../../core/global/app_text-form_filed.dart';
 import '../register/register_page.dart';
 
@@ -59,7 +60,9 @@ class Login extends StatelessWidget {
                   width: double.infinity,
                   height: 40,
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeView(),));
+                    },
                     color: Theme.of(context).primaryColor,
                     child: const Text(
                       'LOGIN',
