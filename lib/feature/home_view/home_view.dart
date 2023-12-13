@@ -2,6 +2,7 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/global/api.dart';
 import '../Awidget/main_drawer.dart';
 import '../first_screen/First_Screen.dart';
 

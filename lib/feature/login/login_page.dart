@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:regester/core/global/api.dart';
 import 'package:regester/feature/home_view/home_view.dart';
 import '../../core/global/app_text-form_filed.dart';
 import '../register/register_page.dart';
+import 'package:http/http.dart' as http ;
 
 class Login extends StatelessWidget {
   const Login({
@@ -61,7 +63,7 @@ class Login extends StatelessWidget {
                   height: 40,
                   child: MaterialButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeView(),));
+                      login(context);
                     },
                     color: Theme.of(context).primaryColor,
                     child: const Text(
@@ -100,4 +102,27 @@ class Login extends StatelessWidget {
       ),
     );
   }
+
+  Future login(BuildContext context) async {
+    String? phone = phoneController?.text ;
+    String? password = passwordController?.text ;
+    var response = await http.post(
+      Uri.parse('${Api.api}/users/login'),
+      headers : {
+        'Accept' : 'application/json' ,
+      } ,
+      body : {
+        'phone' : '$phone',
+        'password' : password,
+      } ,
+    ) ;
+    if(response.statusCode == 200 ) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeView(),));
+      return response.body ;
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('error occured'),));
+    }
+  }
+
+
 }

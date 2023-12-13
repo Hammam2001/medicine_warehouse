@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/global/api.dart';
 import '../../core/global/app_text-form_filed.dart';
 import '../home_view/home_view.dart';
+import 'package:http/http.dart' as http ;
 
 
 class Register extends StatelessWidget {
    Register({super.key});
-  TextEditingController? phoneController;
-  TextEditingController ? passwordController;
-  TextEditingController? firstNameController;
-  TextEditingController ?lastNameController;
-  TextEditingController ?confirmPasswordController;
+  TextEditingController? phoneController = TextEditingController();
+  TextEditingController ? passwordController= TextEditingController();
+  TextEditingController? firstNameController= TextEditingController();
+  TextEditingController ?lastNameController= TextEditingController();
+  TextEditingController ?confirmPasswordController= TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,7 @@ class Register extends StatelessWidget {
                 height: 40,
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.push(context,MaterialPageRoute(builder: (context) => HomeView()) );
+                    register(context);
                   },
                   color: Theme.of(context).primaryColor,
                   child: const Text(
@@ -101,5 +103,35 @@ class Register extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future register(BuildContext context) async {
+    String?phone= phoneController?.text;
+    String?password= passwordController?.text;
+    String?firstname= firstNameController?.text;
+    String?lastname= lastNameController?.text;
+    String?coniform= confirmPasswordController?.text;
+    var response = await http.post(
+      Uri.parse('${Api.api}/users/register'),
+      headers : {
+        'Accept' : 'application/json' ,
+      } ,
+      body : {
+        'phone' : '$phone',
+        'first_name' : firstname ,
+        'last_name' : lastname,
+        'password' : password,
+        'password_confirmation' : coniform,
+      } ,
+    ) ;
+    print(response.body);
+    if(response.statusCode == 200 ) {
+      Navigator.push(context,MaterialPageRoute(builder: (context) => HomeView()) );
+      return response.body ;
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('error occured'),));
+    }
+
+
   }
 }
