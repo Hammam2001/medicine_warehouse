@@ -6,14 +6,12 @@ import '../register/register_page.dart';
 import 'package:http/http.dart' as http ;
 
 class Login extends StatelessWidget {
-  const Login({
+  Login({
     super.key,
-    this.phoneController,
-    this.passwordController,
   });
 
-  final TextEditingController? phoneController;
-  final TextEditingController? passwordController;
+  final TextEditingController? phoneController = TextEditingController();
+  final TextEditingController? passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +46,7 @@ class Login extends StatelessWidget {
                   height: 20,
                 ),
                 TextFiledApp(
-                  controller: phoneController,
+                  controller: passwordController,
                   type: TextInputType.visiblePassword,
                   prefix: Icons.lock,
                   label: 'Password',
@@ -116,6 +114,7 @@ class Login extends StatelessWidget {
         'password' : password,
       } ,
     ) ;
+    print(response.body) ;
     if(response.statusCode == 200 ) {
       Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeView(),));
       return response.body ;

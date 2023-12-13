@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import '../../Medicine_View/medicine_view.dart';
 
 class CatWidget extends StatelessWidget {
-  const CatWidget({Key? key}) : super(key: key);
+  const CatWidget({Key? key, required this.name, required this.id}) : super(key: key);
+
+  final String name ;
+  final int id ;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MedicineView(),));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => MedicineView(id: id,),));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -24,7 +27,7 @@ class CatWidget extends StatelessWidget {
           children: [
             Image.asset("assets/image/hart.jpg",width: 110,),
             Text(
-              "Heart Medicine",
+              name,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: TextStyle(

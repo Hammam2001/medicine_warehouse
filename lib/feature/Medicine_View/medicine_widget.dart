@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import '../Details_View/details_view.dart';
 
 class MedicineWidget extends StatelessWidget {
-  const MedicineWidget({Key? key}) : super(key: key);
+  const MedicineWidget({Key? key, required this.id, required this.name1, required this.name2, required this.price}) : super(key: key);
+
+  final int id;
+  final String name1;
+  final String name2 ;
+  final String price ;
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,7 @@ class MedicineWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Azilsartan",
+                  name1,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
@@ -38,22 +44,22 @@ class MedicineWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  "Aphamia",
+                 Text(
+                  name2,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black54,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  "1500 S.P",
+                Text(
+                  price,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black54,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,

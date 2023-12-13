@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http ;
 import 'package:regester/feature/first_screen/widget/cat_widget.dart';
@@ -14,6 +16,7 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
 
+  List par = [] ;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -29,6 +32,14 @@ class _FirstScreenState extends State<FirstScreen> {
               FutureBuilder(
                 future: getCat(),
                 builder: (context, snapshot) {
+                  if(snapshot.connectionState == ConnectionState.waiting) {
+                    return Column(
+                      children: [
+                        SizedBox(height: 50,),
+                        CircularProgressIndicator(color: Theme.of(context).primaryColor,),
+                      ],
+                    ) ;
+                  }
                   return Container(
                   padding: const EdgeInsets.all(20),
                   decoration: const BoxDecoration(
@@ -59,10 +70,10 @@ class _FirstScreenState extends State<FirstScreen> {
                             crossAxisSpacing: 10,
                           ),
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: 20,
+                          itemCount: par.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            return const CatWidget();
+                            return CatWidget(name: par[index]['name'],id: par[index]['id'],);
                           },
                         ),
                       ),
@@ -79,17 +90,19 @@ class _FirstScreenState extends State<FirstScreen> {
   }
 
   Future getCat() async {
-    var response = await http.post(
+    var response = await http.get(
       Uri.parse('${Api.api}/categories/getAll'),
       headers : {
         'Accept' : 'application/json' ,
       } ,
     ) ;
+    print(response.body) ;
     if(response.statusCode == 200 ) {
+      par = jsonDecode(response.body)['categories'] ;
+      print(par) ;
       return response.body ;
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('error occured'),));
     }
-
   }
 }

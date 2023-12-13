@@ -24,7 +24,7 @@ class _ResultState extends State<Result> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return const MedicineWidget();
+          return const MedicineWidget(id: 0, name1: '', name2: '', price: '',);
         },
       ) : const Center(
         child: Text(
