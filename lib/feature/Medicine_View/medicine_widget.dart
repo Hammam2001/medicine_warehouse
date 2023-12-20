@@ -15,7 +15,7 @@ class MedicineWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailsView(),));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsView(id: id,),));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -56,7 +56,7 @@ class MedicineWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  price,
+                  '$price S.P',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: const TextStyle(
@@ -73,3 +73,5 @@ class MedicineWidget extends StatelessWidget {
     );
   }
 }
+
+// /medicines/get/{id}
