@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:regester/core/global/cart.dart';
 import '../../core/global/api.dart';
 
 class DetailsView extends StatefulWidget {
@@ -19,6 +20,21 @@ class _DetailsViewState extends State<DetailsView> {
   bool fav = false ;
 
   var med ;
+  var favv;
+
+  @override
+  void initState() {
+    super.initState();
+    getd() ;
+  }
+
+  getd() async {
+    await getFav() ;
+    fav = favv.any((product) {
+      return widget.id == product['id'];
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +49,15 @@ class _DetailsViewState extends State<DetailsView> {
             future: getCat(),
             builder:(context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator() ;
+                return Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  color: Colors.white,
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ) ;
               }
               return Column(
                 children: [
@@ -54,7 +78,8 @@ class _DetailsViewState extends State<DetailsView> {
                                 size: 28,
                               )),
                           IconButton(
-                              onPressed: () {
+                              onPressed: ()  {
+                                makeFav() ;
                                 setState(() {
                                   fav = !fav ;
                                 });
@@ -84,7 +109,7 @@ class _DetailsViewState extends State<DetailsView> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
                             image: const DecorationImage(
-                              image: AssetImage("assets/image/hart.jpg"),
+                              image: AssetImage("assets/image/121.jpg"),
                             )
                           ),
                         ),
@@ -100,7 +125,7 @@ class _DetailsViewState extends State<DetailsView> {
                               ),
                             ) ,
                             Text(
-                              med['Generic Name'],
+                              med['generic_name'],
                               style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 18 ,
@@ -121,7 +146,7 @@ class _DetailsViewState extends State<DetailsView> {
                               ),
                             ) ,
                             Text(
-                              med['Brand Name'],
+                              med['brand_name'],
                               style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 18 ,
@@ -142,7 +167,7 @@ class _DetailsViewState extends State<DetailsView> {
                               ),
                             ) ,
                             Text(
-                              med['Manufacturer Name'],
+                              med['manufacturer_name'],
                               style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 18 ,
@@ -163,7 +188,7 @@ class _DetailsViewState extends State<DetailsView> {
                               ),
                             ) ,
                             Text(
-                              med['Expiry Date'],
+                              med['expiry_date'],
                               style: const TextStyle(
                                 color: Colors.black54,
                                 fontSize: 18 ,
@@ -221,20 +246,25 @@ class _DetailsViewState extends State<DetailsView> {
                               ),
                             ),
                             Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Theme.of(context).primaryColor,
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
+                              child: InkWell(
+                                onTap: () {
+                                  Cart.product.add({'product' : med , 'quantity' : quantity}) ;
+                                },
                                 child: Container(
-                                  alignment: Alignment.center,
-                                  padding: const EdgeInsets.all(10),
-                                  child: const Text(
-                                    "Add To Cart" ,
-                                    style: TextStyle(
-                                      color: Colors.white ,
-                                      fontSize: 18 ,
-                                      fontWeight: FontWeight.w500,
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    borderRadius: BorderRadius.circular(25),
+                                  ),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(10),
+                                    child: const Text(
+                                      "Add To Cart" ,
+                                      style: TextStyle(
+                                        color: Colors.white ,
+                                        fontSize: 18 ,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -270,6 +300,56 @@ class _DetailsViewState extends State<DetailsView> {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('error occured'),
       ));
+    }
+  }
+
+  Future getFav() async {
+    var response = await http.get(
+      Uri.parse('${Api.api}/favourites/getAll'),
+      headers : {
+        'Accept' : 'application/json' ,
+        'Authorization' : 'Bearer ${Api.token}' ,
+      } ,
+    ) ;
+    print(response.body) ;
+    if(response.statusCode == 200 ) {
+      var map = jsonDecode(response.body) ;
+      favv = map['favourites'] ;
+      return response.body ;
+    }
+  }
+
+  Future makeFav() async {
+    if(!fav) {
+      var response = await http.post(
+        Uri.parse('${Api.api}/favourites/add'),
+        headers : {
+          'Accept' : 'application/json' ,
+          'Authorization' : 'Bearer ${Api.token}' ,
+        } ,
+        body : {
+          'medicine_id' : '${widget.id}',
+        } ,
+      ) ;
+      print(response.body) ;
+      if(response.statusCode == 200 ) {
+        return response.body ;
+      }
+    } else {
+      var response = await http.post(
+        Uri.parse('${Api.api}/favourites/remove'),
+        headers : {
+          'Accept' : 'application/json' ,
+          'Authorization' : 'Bearer ${Api.token}' ,
+        } ,
+        body : {
+          'medicine_id' : '${widget.id}',
+        } ,
+      ) ;
+      print(response.body) ;
+      if(response.statusCode == 200 ) {
+        return response.body ;
+      }
     }
   }
 

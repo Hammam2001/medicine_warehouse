@@ -28,7 +28,7 @@ class MedicineWidget extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset("assets/image/hart.jpg",width: 110,),
+            Image.asset("assets/image/121.jpg",width: 110,),
             const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

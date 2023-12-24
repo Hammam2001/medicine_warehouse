@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -126,6 +128,8 @@ class Register extends StatelessWidget {
     ) ;
     print(response.body);
     if(response.statusCode == 200 ) {
+      var map = jsonDecode(response.body) ;
+      Api.token = map['token'] ;
       Navigator.push(context,MaterialPageRoute(builder: (context) => HomeView()) );
       return response.body ;
     } else {

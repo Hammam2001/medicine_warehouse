@@ -2,6 +2,7 @@ import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:regester/feature/Fav_Screen/fav_screen.dart';
+import 'package:regester/feature/cart/cart_view.dart';
 
 import '../../core/global/api.dart';
 import '../Awidget/main_drawer.dart';
@@ -31,8 +32,8 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     _tabs = [
       const FirstScreen() ,
-      const FavScreen(),
-      const FavScreen(),
+      FavScreen(),
+      const CartView(),
     ];
     return Scaffold(
       body: _tabs[_selectedIndex],

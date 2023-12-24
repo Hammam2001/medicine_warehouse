@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:regester/core/global/api.dart';
 import 'package:regester/feature/home_view/home_view.dart';
@@ -116,6 +118,8 @@ class Login extends StatelessWidget {
     ) ;
     print(response.body) ;
     if(response.statusCode == 200 ) {
+      var map = jsonDecode(response.body) ;
+      Api.token = map['token']["accessToken"] ;
       Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeView(),));
       return response.body ;
     } else {

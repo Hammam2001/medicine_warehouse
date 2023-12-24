@@ -28,6 +28,16 @@ class _MedicineViewState extends State<MedicineView> {
           child: FutureBuilder(
             future: getCat(),
             builder: (context, snapshot) {
+              if(snapshot.connectionState == ConnectionState.waiting) {
+                return Container(
+                  height: MediaQuery.of(context).size.height,
+                  color: Colors.white,
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                );
+              }
               return Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -57,8 +67,8 @@ class _MedicineViewState extends State<MedicineView> {
                                     itemBuilder: (context, index) {
                                       return MedicineWidget(
                                         id: par[index]['id'],
-                                        name1: par[index]['Generic Name'],
-                                        name2: par[index]['Brand Name'],
+                                        name1: par[index]['generic_name'],
+                                        name2: par[index]['brand_name'],
                                         price: par[index]['price'].toString(),
                                       );
                                     },

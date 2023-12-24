@@ -33,12 +33,14 @@ class _FirstScreenState extends State<FirstScreen> {
                 future: getCat(),
                 builder: (context, snapshot) {
                   if(snapshot.connectionState == ConnectionState.waiting) {
-                    return Column(
-                      children: [
-                        SizedBox(height: 50,),
-                        CircularProgressIndicator(color: Theme.of(context).primaryColor,),
-                      ],
-                    ) ;
+                    return Container(
+                      height: MediaQuery.of(context).size.height,
+                      color: Colors.white,
+                      alignment: Alignment.center,
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    );
                   }
                   return Container(
                   padding: const EdgeInsets.all(20),
