@@ -3,6 +3,7 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:regester/feature/Fav_Screen/fav_screen.dart';
 import 'package:regester/feature/cart/cart_view.dart';
+import 'package:regester/language.dart';
 
 import '../../core/global/api.dart';
 import '../Awidget/main_drawer.dart';
@@ -35,49 +36,52 @@ class _HomeViewState extends State<HomeView> {
       FavScreen(),
       const CartView(),
     ];
-    return Scaffold(
-      body: _tabs[_selectedIndex],
-      bottomNavigationBar: CircularBottomNavigation(
-        [
-          TabItem(
-            Icons.home_filled,
-            'Home',
-            Theme.of(context).primaryColor,
-            labelStyle: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
+    return Directionality(
+      textDirection: Language.isEn ? TextDirection.ltr : TextDirection.rtl,
+      child: Scaffold(
+        body: _tabs[_selectedIndex],
+        bottomNavigationBar: CircularBottomNavigation(
+          [
+            TabItem(
+              Icons.home_filled,
+              Language.isEn ? 'Home' : 'الرئيسية',
+              Theme.of(context).primaryColor,
+              labelStyle: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-          TabItem(
-            Icons.favorite,
-            "Favorites",
-            Theme.of(context).primaryColor,
-            labelStyle: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
+            TabItem(
+              Icons.favorite,
+              Language.isEn ? "Favorites": 'المفضلة',
+              Theme.of(context).primaryColor,
+              labelStyle: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-          TabItem(
-            Icons.shopping_cart_outlined,
-            "Cart",
-            Theme.of(context).primaryColor,
-            labelStyle: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
+            TabItem(
+              Icons.shopping_cart_outlined,
+              Language.isEn ? "Cart" : 'السلة',
+              Theme.of(context).primaryColor,
+              labelStyle: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              ),
             ),
-          ),
-        ],
-        controller: _navigationController,
-        selectedPos: _selectedIndex,
-        barBackgroundColor: Colors.white,
-        animationDuration: const Duration(milliseconds: 300),
-        selectedCallback: (selected) {
-          setState(() {
-            _selectedIndex = selected!;
-          });
-        },
+          ],
+          controller: _navigationController,
+          selectedPos: _selectedIndex,
+          barBackgroundColor: Colors.white,
+          animationDuration: const Duration(milliseconds: 300),
+          selectedCallback: (selected) {
+            setState(() {
+              _selectedIndex = selected!;
+            });
+          },
+        ),
+        drawer: const MainDrawer(),
       ),
-      drawer: const MainDrawer(),
     );
   }
 }

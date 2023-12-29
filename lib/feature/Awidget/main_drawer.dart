@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:regester/feature/login/login_page.dart';
 import 'package:regester/feature/myOrders/myorders_view.dart';
+import 'package:regester/language.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class MainDrawer extends StatefulWidget {
 }
 
 class _MainDrawerState extends State<MainDrawer> {
-  bool isEn = false ;
+  bool isEn = true;
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +26,9 @@ class _MainDrawerState extends State<MainDrawer> {
               height: 100,
               decoration:
               BoxDecoration(color: Theme.of(context).primaryColor),
-              child: const Text(
-                "Get Your Medicine",
-                style: TextStyle(
+              child: Text(
+                Language.isEn ? "Get Your Medicine" : "احصل على ادوئتك",
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
                     fontWeight: FontWeight.bold),
@@ -40,15 +41,15 @@ class _MainDrawerState extends State<MainDrawer> {
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyOrdersView(),)) ;
               },
-              child: const Row(
+              child:  Row(
                 children: [
-                  Icon(Icons.shopping_cart_rounded),
-                  SizedBox(
+                  const Icon(Icons.shopping_cart_rounded),
+                  const SizedBox(
                     width: 30,
                   ),
                   Text(
-                    "My Orders",
-                    style: TextStyle(color: Colors.black54, fontSize: 18),
+                    Language.isEn ? "My Orders" :"طلباتي",
+                    style: const TextStyle(color: Colors.black54, fontSize: 18),
                   ),
                 ],
               ),
@@ -60,38 +61,39 @@ class _MainDrawerState extends State<MainDrawer> {
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Login(),)) ;
               },
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.logout),
-                  SizedBox(
+                  const Icon(Icons.logout),
+                  const SizedBox(
                     width: 30,
                   ),
                   Text(
-                    "Log Out",
-                    style: TextStyle(color: Colors.black54, fontSize: 18),
+                    Language.isEn ? "Log Out" : "تسجيل الخروج",
+                    style: const TextStyle(color: Colors.black54, fontSize: 18),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 30,),
-            const Text(
-              "Change Language :",
-              style: TextStyle(color: Colors.black54, fontSize: 18),
+            Text(
+              Language.isEn ? "Change Language :" :"تغيير اللغة",
+              style: const TextStyle(color: Colors.black54, fontSize: 18),
             ),
             const SizedBox(height: 10,),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  "Arabic" ,
+                  Language.isEn ? "Arabic" : "العربية",
                   style: Theme.of(context).textTheme.headline6,
                 ),
                 Switch(
                   value: isEn,
                   onChanged: (newLan) {
                     setState(() {
-                      isEn = !isEn ;
+                      isEn = newLan ;
                     });
+                    Language.isEn = isEn ;
                   },
                   inactiveTrackColor:
                   isEn
@@ -99,7 +101,7 @@ class _MainDrawerState extends State<MainDrawer> {
                       : Colors.grey,
                 ),
                 Text(
-                  "English",
+                  Language.isEn ? "English" : "الانجليزية",
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ],

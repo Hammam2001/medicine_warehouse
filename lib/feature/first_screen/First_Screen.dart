@@ -6,6 +6,7 @@ import 'package:regester/feature/first_screen/widget/cat_widget.dart';
 import 'package:regester/feature/first_screen/widget/first_app_bar.dart';
 
 import '../../core/global/api.dart';
+import '../../language.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({Key? key}) : super(key: key);
@@ -53,9 +54,9 @@ class _FirstScreenState extends State<FirstScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Categories",
-                        style: TextStyle(
+                      Text(
+                        Language.isEn ?"Categories" : 'التصنيفات',
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.w500,

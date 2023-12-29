@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../language.dart';
+
 class MedicineAppBar extends StatelessWidget {
   const MedicineAppBar({Key? key}) : super(key: key);
 
@@ -21,9 +23,9 @@ class MedicineAppBar extends StatelessWidget {
                   size: 28,
                 )),
             const SizedBox(width: 100,),
-            const Text(
-              "Medicines",
-              style: TextStyle(
+            Text(
+              Language.isEn ? "Medicines" :"الادوية",
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,

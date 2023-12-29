@@ -5,6 +5,7 @@ import 'package:regester/feature/Medicine_View/medicine_widget.dart';
 
 import 'package:http/http.dart' as http;
 import '../../core/global/api.dart';
+import '../../language.dart';
 import '../first_screen/widget/first_app_bar.dart';
 
 class FavScreen extends StatelessWidget {
@@ -48,9 +49,9 @@ class FavScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Favorites",
-                          style: TextStyle(
+                        Text(
+                          Language.isEn ?"Favorites" : 'المفضلة',
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.w500,

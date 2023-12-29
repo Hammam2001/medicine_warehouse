@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:regester/language.dart';
 
 import '../../core/global/api.dart';
 import '../../core/global/app_text-form_filed.dart';
@@ -19,88 +20,91 @@ class Register extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Register',style: TextStyle(color:Colors.white),),
-        backgroundColor: Theme.of(context).primaryColor,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TextFiledApp(
-                controller: firstNameController,
-                type: TextInputType.name,
-                label: 'First Name',
-                obscurePassword: false,
-                prefix: Icons.abc,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFiledApp(
-                controller: lastNameController,
-                type: TextInputType.name,
-                label: 'Last Name',
-                obscurePassword: false,
-                prefix: Icons.abc,
+    return Directionality(
+      textDirection: Language.isEn ? TextDirection.ltr : TextDirection.rtl,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text( Language.isEn ? 'Register' : 'تسجيل',style: TextStyle(color:Colors.white),),
+          backgroundColor: Theme.of(context).primaryColor,
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TextFiledApp(
+                  controller: firstNameController,
+                  type: TextInputType.name,
+                  label: Language.isEn ? 'First Name' : 'الاسم الاول',
+                  obscurePassword: false,
+                  prefix: Icons.abc,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFiledApp(
+                  controller: lastNameController,
+                  type: TextInputType.name,
+                  label: Language.isEn ? 'Last Name' : 'الاسم الاخير',
+                  obscurePassword: false,
+                  prefix: Icons.abc,
 
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFiledApp(
-                controller: phoneController ,
-                type: TextInputType.name,
-                label: 'Phone',
-                obscurePassword: false,
-                prefix: Icons.numbers,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFiledApp(
+                  controller: phoneController ,
+                  type: TextInputType.name,
+                  label: Language.isEn ? 'Phone' : 'رقم الهاتف',
+                  obscurePassword: false,
+                  prefix: Icons.numbers,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
 
-              TextFiledApp(
-                controller: passwordController,
-                type: TextInputType.visiblePassword,
-                prefix: Icons.lock,
-                label: 'Password',
-                obscurePassword: true,
-                suffix: Icons.remove_red_eye_sharp,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFiledApp(
-                controller: confirmPasswordController,
-                type: TextInputType.visiblePassword,
-                prefix: Icons.lock,
-                label: 'Confirm Password',
-                obscurePassword: true,
-                suffix: Icons.remove_red_eye_sharp,
-              ),
+                TextFiledApp(
+                  controller: passwordController,
+                  type: TextInputType.visiblePassword,
+                  prefix: Icons.lock,
+                  label: Language.isEn ? 'Password' : 'كلمة المرور',
+                  obscurePassword: true,
+                  suffix: Icons.remove_red_eye_sharp,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFiledApp(
+                  controller: confirmPasswordController,
+                  type: TextInputType.visiblePassword,
+                  prefix: Icons.lock,
+                  label: Language.isEn ? 'Confirm Password' : 'تاكيد كلمة المرور',
+                  obscurePassword: true,
+                  suffix: Icons.remove_red_eye_sharp,
+                ),
 
-              const SizedBox(
-                height: 40,
-              ),
-              SizedBox(
-                width: double.infinity,
-                height: 40,
-                child: MaterialButton(
-                  onPressed: () {
-                    register(context);
-                  },
-                  color: Theme.of(context).primaryColor,
-                  child: const Text(
-                    'Register',
-                    style: TextStyle(fontSize: 17, color: Colors.white),
+                const SizedBox(
+                  height: 40,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: MaterialButton(
+                    onPressed: () {
+                      register(context);
+                    },
+                    color: Theme.of(context).primaryColor,
+                    child: Text(
+                      Language.isEn ? 'Register'  : 'تسجيل',
+                      style: const TextStyle(fontSize: 17, color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

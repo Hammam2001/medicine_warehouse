@@ -6,7 +6,7 @@ import 'package:regester/core/global/cart.dart';
 import 'package:regester/feature/Details_View/medicine_widget2.dart';
 
 import '../../core/global/api.dart';
-import '../Medicine_View/medicine_widget.dart';
+import '../../language.dart';
 import '../first_screen/widget/first_app_bar.dart';
 
 class CartView extends StatelessWidget {
@@ -35,9 +35,9 @@ class CartView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Carts",
-                      style: TextStyle(
+                    Text(
+                      Language.isEn ? "Carts" : 'السلة',
+                      style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.w500,
@@ -70,9 +70,9 @@ class CartView extends StatelessWidget {
                           color: Theme.of(context).primaryColor ,
                           borderRadius: BorderRadius.circular(25) ,
                         ),
-                        child: const Text(
-                          'Make an Order' ,
-                          style: TextStyle(
+                        child: Text(
+                          Language.isEn ? 'Make an Order'  : 'القيام بالطلب',
+                          style: const TextStyle(
                             fontSize: 18 ,
                             fontWeight: FontWeight.w500 ,
                             color: Colors.white
