@@ -45,6 +45,14 @@ class MyOrdersView extends StatelessWidget {
                   ),
                 );
               }
+              if (rrr == null) {
+                return Container(
+                  height: MediaQuery.of(context).size.height,
+                  color: Colors.white,
+                  alignment: Alignment.center,
+                  child: Text ('no orders have done yet'),
+                );
+              }
               return Directionality(
                 textDirection: TextDirection.ltr,
                 child: Container(

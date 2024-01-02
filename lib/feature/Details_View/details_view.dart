@@ -26,10 +26,10 @@ class _DetailsViewState extends State<DetailsView> {
   @override
   void initState() {
     super.initState();
-    getd() ;
+    isFav() ;
   }
 
-  getd() async {
+  isFav() async {
     await getFav() ;
     fav = favv.any((product) {
       return widget.id == product['id'];
@@ -49,7 +49,7 @@ class _DetailsViewState extends State<DetailsView> {
               color: Theme.of(context).primaryColor,
             ),
             child: FutureBuilder(
-              future: getCat(),
+              future: getDetails(),
               builder:(context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Container(
@@ -288,7 +288,7 @@ class _DetailsViewState extends State<DetailsView> {
     );
   }
 
-  Future getCat() async {
+  Future getDetails() async {
     var response = await http.get(
       Uri.parse('${Api.api}/medicines/get/${widget.id}'),
       headers: {
@@ -383,7 +383,7 @@ class _DetailsViewState extends State<DetailsView> {
   onChanged (int check) {
     setState(() {
       if (check == 1) {
-        quantity = quantity > 1 ? quantity - 1 : quantity = 1;
+        quantity = quantity > 1 ? quantity - 1 : 1;
       } else {
         quantity = quantity + 1;
       }

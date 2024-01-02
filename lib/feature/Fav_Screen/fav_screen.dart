@@ -40,6 +40,7 @@ class FavScreen extends StatelessWidget {
                   }
                   return Container(
                     padding: const EdgeInsets.all(20),
+                    // margin: EdgeInsets.all(20),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -66,7 +67,7 @@ class FavScreen extends StatelessWidget {
                             itemCount: favv.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              return const MedicineWidget(id: 1, name1: 'paracetamol', name2: 'dsa', price: '500');
+                              return MedicineWidget(id: favv[index]['id'], name1: favv[index]['generic_name'], name2: favv[index]['brand_name'], price: favv[index]['price'].toString());
                             },
                           ),
                         ),

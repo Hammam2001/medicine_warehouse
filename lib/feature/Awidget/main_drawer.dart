@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:regester/feature/bill_view.dart';
 import 'package:regester/feature/login/login_page.dart';
 import 'package:regester/feature/myOrders/myorders_view.dart';
 import 'package:regester/language.dart';
+import 'package:http/http.dart' as http;
+
+import '../../core/global/api.dart';
 
 class MainDrawer extends StatefulWidget {
   const MainDrawer({Key? key}) : super(key: key);
@@ -27,7 +31,7 @@ class _MainDrawerState extends State<MainDrawer> {
               decoration:
               BoxDecoration(color: Theme.of(context).primaryColor),
               child: Text(
-                Language.isEn ? "Get Your Medicine" : "احصل على ادوئتك",
+                Language.isEn ? "Get Your Medicine" : "احصل على الادوية",
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
@@ -59,7 +63,27 @@ class _MainDrawerState extends State<MainDrawer> {
             ),
             InkWell(
               onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Login(),)) ;
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BillView(),)) ;
+              },
+              child:  Row(
+                children: [
+                  const Icon(Icons.wrap_text),
+                  const SizedBox(
+                    width: 30,
+                  ),
+                  Text(
+                    Language.isEn ? "Bill" :"التقرير",
+                    style: const TextStyle(color: Colors.black54, fontSize: 18),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            InkWell(
+              onTap: () async {
+                await logout() ;
               },
               child: Row(
                 children: [
@@ -110,5 +134,21 @@ class _MainDrawerState extends State<MainDrawer> {
         ),
       ),
     );
+  }
+
+  Future logout() async {
+    var response = await http.get(
+        Uri.parse('${Api.api}/users/logout') ,
+        headers: {
+          'Accept': 'application/json',
+          'Authorization' : 'Bearer ${Api.token}' ,
+        }
+    ) ;
+    print(response.body) ;
+    if(response.statusCode == 200) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Login(),)) ;
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('logout succesfully')));
+      return response.body ;
+    }
   }
 }

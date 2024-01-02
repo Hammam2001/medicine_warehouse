@@ -29,7 +29,7 @@ class _MedicineViewState extends State<MedicineView> {
         body: SingleChildScrollView(
           child: SafeArea(
             child: FutureBuilder(
-              future: getCat(),
+              future: getMedicine(),
               builder: (context, snapshot) {
                 if(snapshot.connectionState == ConnectionState.waiting) {
                   return Container(
@@ -105,7 +105,7 @@ class _MedicineViewState extends State<MedicineView> {
     );
   }
 
-  Future getCat() async {
+  Future getMedicine() async {
     var response = await http.get(
       Uri.parse('${Api.api}/medicines/show/${widget.id}'),
       headers: {

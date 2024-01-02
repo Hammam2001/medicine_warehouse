@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:regester/feature/Medicine_View/medicine_widget.dart';
@@ -39,7 +40,7 @@ class _ResultState extends State<Result> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return CatWidget(name: cat[index]['name'].toString(), id: cat[index]['id']) ;
+                return CatWidget(name: cat[index]['name'].toString(), id: cat[index]['id'], index: Random().nextInt(18),) ;
               },
             ),
           ) ;

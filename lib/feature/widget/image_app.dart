@@ -9,7 +9,7 @@ class ImageApp extends StatelessWidget {
       height: 300,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/gh.jpg")
+          image: AssetImage("assets/image/pharmacy.jpeg")
         )
       ),
     );

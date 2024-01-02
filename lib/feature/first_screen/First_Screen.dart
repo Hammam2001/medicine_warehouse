@@ -18,6 +18,7 @@ class FirstScreen extends StatefulWidget {
 class _FirstScreenState extends State<FirstScreen> {
 
   List par = [] ;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -55,7 +56,7 @@ class _FirstScreenState extends State<FirstScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        Language.isEn ?"Categories" : 'التصنيفات',
+                        Language.isEn ? "Categories" : 'التصنيفات',
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -76,7 +77,8 @@ class _FirstScreenState extends State<FirstScreen> {
                           itemCount: par.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            return CatWidget(name: par[index]['name'],id: par[index]['id'],);
+                            var ind = 2 ;
+                            return CatWidget(name: par[index]['name'],id: par[index]['id'], index: index == par.length-1 ? index - par.length + ind++ :  index,);
                           },
                         ),
                       ),
